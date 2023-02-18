@@ -7,10 +7,10 @@
     <img class="bookcover" src="{% static 'images/dfp.jpg' %}">
     {% if user.is_authenticated %}
         Привет {{ user.email }}!
-        <p><a href="{% url 'logout' %}">Выйти</a></p>
+        <p><a href="{% url 'account_logout' %}">Выйти</a></p>
     {% else %}
         <p>Вы не вошли в систему</p>
-        <a href="{% url 'login' %}">Авторизоваться</a>
-        <a href="{% url 'signup' %}">Регистрация</a>
+        <a href="{% url 'account_login' %}">Авторизоваться</a>
+        <a href="{% url 'account_signup' %}">Регистрация</a>
     {% endif %}
 {% endblock content %}
