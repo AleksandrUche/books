@@ -2,5 +2,13 @@
 
 {% block title %}Главная страница{% endblock title %}
 {% block content %}
-<h1>Главная страница</h1>
+    <h1>Главная страница</h1>
+    {% if user.is_authenticated %}
+        Привет {{ user.email }}!
+        <p><a href="{% url 'logout' %}">Выйти</a></p>
+    {% else %}
+        <p>Вы не вошли в систему</p>
+        <a href="{% url 'login' %}">Авторизоваться</a>
+        <a href="{% url 'signup' %}">Регистрация</a>
+    {% endif %}
 {% endblock content %}
