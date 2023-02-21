@@ -4,7 +4,9 @@
 {% block title %}Главная страница{% endblock title %}
 {% block content %}
     <h1>Главная страница</h1>
-    <img class="bookcover" src="{% static 'images/dfp.jpg' %}">
+    <div>
+        <img class="bookcover" src="{% static 'images/dfp.jpg' %}">
+    </div>
     {% if user.is_authenticated %}
         Привет {{ user.email }}!
         <p><a href="{% url 'account_logout' %}">Выйти</a></p>
