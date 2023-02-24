@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from environs import Env # new
-env = Env() # new
-env.read_env() # new
+from environs import Env  # new
+
+env = Env()  # new
+env.read_env()  # new
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth',
     'allauth.account',
+    'debug_toolbar',
     # Локальные
     'accounts',
     'pages',
@@ -58,7 +60,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 ROOT_URLCONF = 'config.urls'
 
@@ -85,7 +92,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     "default": env.dj_db_url("DATABASE_URL",
-    default="postgres://postgres@db/postgres")
+                             default="postgres://postgres@db/postgres")
 }
 
 # Password validation
@@ -155,3 +162,8 @@ DEFAULT_FROM_EMAIL = 'admin@bookstore.com'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+
+# django-debug-toolbar
+import socket
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]

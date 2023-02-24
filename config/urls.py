@@ -4,11 +4,18 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    # Админка
-    path('admin/', admin.site.urls),
-    # Управление пользователями
-    path('accounts/', include('allauth.urls')),
-    # Локальные приложения
-    path('', include('pages.urls')),
-    path('books/', include('books.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  # Админка
+                  path('admin/', admin.site.urls),
+                  # Управление пользователями
+                  path('accounts/', include('allauth.urls')),
+                  # Локальные приложения
+                  path('', include('pages.urls')),
+                  path('books/', include('books.urls')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+                      path('__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

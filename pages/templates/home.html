@@ -9,12 +9,12 @@
         <input name="q" class="form-control mr-sm-2" type="text"
                placeholder="Search" aria-label="Search">
     </form>
-{#    {% if user.is_authenticated %}#}
-{#        Привет {{ user.email }}!#}
-{#        <p><a href="{% url 'account_logout' %}">Выйти</a></p>#}
-{#    {% else %}#}
-{#        <p>Вы не вошли в систему</p>#}
-{#        <a href="{% url 'account_login' %}">Авторизоваться</a>#}
-{#        <a href="{% url 'account_signup' %}">Регистрация</a>#}
-{#    {% endif %}#}
+    {% if user.is_authenticated %}
+        Привет {{ user.email }}!
+        <p><a href="{% url 'account_logout' %}">Выйти</a></p>
+    {% else %}
+        <p>Вы не вошли в систему</p>
+        <a href="{% url 'account_login' %}">Авторизоваться</a>
+        <a href="{% url 'account_signup' %}">Регистрация</a>
+    {% endif %}
 {% endblock content %}
