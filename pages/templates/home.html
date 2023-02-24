@@ -4,15 +4,17 @@
 {% block title %}Главная страница{% endblock title %}
 {% block content %}
     <h1>Главная страница</h1>
-    <div>
-        <img class="bookcover" src="{% static 'images/dfp.jpg' %}">
-    </div>
-    {% if user.is_authenticated %}
-        Привет {{ user.email }}!
-        <p><a href="{% url 'account_logout' %}">Выйти</a></p>
-    {% else %}
-        <p>Вы не вошли в систему</p>
-        <a href="{% url 'account_login' %}">Авторизоваться</a>
-        <a href="{% url 'account_signup' %}">Регистрация</a>
-    {% endif %}
+    <form class="form-inline mt-2 mt-md-0" action="{% url 'search_results' %}"
+          method="get">
+        <input name="q" class="form-control mr-sm-2" type="text"
+               placeholder="Search" aria-label="Search">
+    </form>
+{#    {% if user.is_authenticated %}#}
+{#        Привет {{ user.email }}!#}
+{#        <p><a href="{% url 'account_logout' %}">Выйти</a></p>#}
+{#    {% else %}#}
+{#        <p>Вы не вошли в систему</p>#}
+{#        <a href="{% url 'account_login' %}">Авторизоваться</a>#}
+{#        <a href="{% url 'account_signup' %}">Регистрация</a>#}
+{#    {% endif %}#}
 {% endblock content %}
